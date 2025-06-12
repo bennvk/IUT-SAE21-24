@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-06-11" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.2.3240" locale="fr_FR">
+    <description/>
+    <view zooming-state="default:0" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="200" order="0"/>
+        <field id="tpd4" name="Date de début" width="75" order="1"/>
+        <field id="tpd5" name="Date de fin" width="75" order="2"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="color.recent">
+            <![CDATA[#333333 #ff9933 #ffff00 #33ff00 #ff0033 #3366ff]]>
+        </option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="210" order="0"/>
+        <field id="1" name="Rôle par défaut" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="journée 1" color="#000000" meeting="false" start="2025-06-12" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true">
+            <task id="1" name="Fusion des idées" color="#8cb6ce" meeting="false" start="2025-06-12" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+            <task id="29" name="recherche documentation" meeting="false" start="2025-06-12" duration="1" complete="0" expand="true"/>
+            <task id="15" name="Création de la matrice RACI" color="#8cb6ce" meeting="false" start="2025-06-12" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="false"/>
+            <task id="14" name="Gantt prévisionnel" color="#8cb6ce" meeting="false" start="2025-06-12" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+            <task id="19" name="plan d'infrastructure réseau" color="#8cb6ce" meeting="false" start="2025-06-12" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="2" name="journée 2" color="#000000" meeting="false" start="2025-06-13" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true">
+            <task id="20" name="Configuration" color="#3366ff" meeting="false" start="2025-06-13" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+            <task id="21" name="installation services docker" color="#3366ff" meeting="false" start="2025-06-13" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="false"/>
+            <task id="30" name="installation clients" color="#3366ff" meeting="false" start="2025-06-13" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="4" name="journée 3" color="#000000" meeting="false" start="2025-06-16" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true">
+            <task id="22" name="téléphonie IP" color="#ff0033" meeting="false" start="2025-06-16" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+            <task id="31" name="Priorisation QoS téléphonie" color="#ff0033" meeting="false" start="2025-06-16" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="6" name="journée 4" color="#000000" meeting="false" start="2025-06-17" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true">
+            <task id="24" name="capteur de température" color="#33ff00" meeting="false" start="2025-06-17" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+            <task id="23" name="vidéosurveillance" color="#33ff00" meeting="false" start="2025-06-17" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+            <task id="25" name="intranet" color="#33ff00" meeting="false" start="2025-06-17" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="8" name="journée 5" color="#000000" meeting="false" start="2025-06-18" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true">
+            <task id="26" name="reconnaissance" color="#ffff00" meeting="false" start="2025-06-18" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+            <task id="27" name="écoute de communication" color="#ffff00" meeting="false" start="2025-06-18" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="10" name="journée 6" color="#000000" meeting="false" start="2025-06-19" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true">
+            <task id="28" name="sécurité des flux" color="#ff9933" meeting="false" start="2025-06-19" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+            <task id="32" name="Rapport final + Archivage" color="#ff9933" meeting="false" start="2025-06-19" duration="1" complete="0" thirdDate="2025-06-11" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="13" name="journée 7" color="#000000" meeting="false" start="2025-06-20" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true">
+            <task id="11" name="Soutenance orale" color="#333333" meeting="false" start="2025-06-20" duration="1" complete="0" thirdDate="2025-06-12" thirdDate-constraint="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Mathéo Crépieux" function="Default:0" contacts="" phone=""/>
+        <resource id="1" name="Alan Gaubert" function="Default:0" contacts="" phone=""/>
+        <resource id="2" name="Benjamin Petillon" function="Default:0" contacts="" phone=""/>
+        <resource id="3" name="Alexis Stingre" function="Default:0" contacts="" phone=""/>
+        <resource id="4" name="Raphaël Laurent" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
