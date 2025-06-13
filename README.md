@@ -82,5 +82,3 @@ Alexis Stingre
 Raphaël Laurent
 
 </aside>
-
-Plan d’adressage :
