@@ -11,17 +11,17 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index_fr.html">
                 <img src="assets/RAMBA.png" alt="RAMBA" style="height: 40px;" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index_fr.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about_fr.html">À propos</a></li>
                 </ul>
                 <form class="d-flex">
-                    <a class="btn btn-outline-dark" href="panier.html">
+                    <a class="btn btn-outline-dark" href="panier_fr.html">
                         <i class="bi-cart-fill me-1"></i>
                         Panier
                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
@@ -37,18 +37,27 @@
                 <div class="col-md-6">
                     <div class="small mb-1">SKU: RAMBA-ECOUT-001</div>
                     <h1 class="display-5 fw-bolder">Écouteurs sans-fil</h1>
-                    <div class="fs-5 mb-5">
+                    <div class="fs-5 mb-4">
                         <span class="text-decoration-line-through">80€</span>
                         <span>59,99€</span>
                     </div>
                     <p class="lead">Profitez d’un son de haute qualité avec les écouteurs sans-fil RAMBA. Autonomie longue durée, design ergonomique, parfaits pour le sport ou le quotidien. Boîtier de recharge inclus.</p>
-                    <div class="d-flex">
-                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                            <i class="bi-cart-fill me-1"></i>
-                            Ajouter au panier
-                        </button>
-                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label for="optionProduit" class="form-label fw-bold">Options :</label>
+                            <select class="form-select mb-3" id="optionProduit" name="optionProduit">
+                                <option value="base">Version classique - 59,99€</option>
+                                <option value="pro">Version Pro (réduction de bruit active) - 79,99€</option>
+                            </select>
+                        </div>
+                        <div class="d-flex">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <i class="bi-cart-fill me-1"></i>
+                                Ajouter au panier
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
