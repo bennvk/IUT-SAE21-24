@@ -3,8 +3,9 @@
 # 🌱 Projet Pépinière - SAE21 / SAE24
 
 ## 🧭 Plan d'adressage
-
-<img src="drawio/schema_crop.png" alt="plan adressage" width="400"/>
+<p align="center">
+  <img src="drawio/schema_crop.png" alt="plan adressage" width="400"/>
+</p>
 
 ## 🎯 Objectifs
 
