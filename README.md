@@ -2,6 +2,11 @@
 
 # 🌱 Projet Pépinière - SAE21 / SAE24
 
+## 🧭 Plan d'adressage
+<p align="center">
+  <img src="drawio/schema_crop.png" alt="plan adressage" width="400"/>
+</p>
+
 ## 🎯 Objectifs
 
 Ce projet a pour but de concevoir, configurer et sécuriser l'infrastructure réseau complète d'une entreprise fictive intégrée dans une pépinière d'entreprises. Ce travail s'effectue en équipe, dans un contexte professionnel simulé, avec une attention particulière sur la configuration système, réseau, téléphonie IP, sécurité, services web et objets connectés.
