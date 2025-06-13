@@ -1,6 +1,3 @@
 flask
-flask_sqlalchemy
 psycopg2-binary
 python-dotenv
-werkzeug
-flask_login
