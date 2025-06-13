@@ -4,7 +4,7 @@
 
 ## 🧭 Plan d'adressage
 
-![plan adressage](drawio/schema_crop.png)
+<img src="drawio/schema_crop.png" alt="plan adressage" width="400"/>
 
 ## 🎯 Objectifs
 
