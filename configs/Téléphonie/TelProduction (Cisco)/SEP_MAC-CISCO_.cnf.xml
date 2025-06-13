@@ -22,7 +22,7 @@
               <sipPort>5060</sipPort>
               <securedSipPort>5061</securedSipPort>
             </ports>
-            <processNodeName>?? ?? à compléter quand on aura l'ip ?? ??</processNodeName>
+            <processNodeName>?? ?? IP du serv asterisk à compléter ?? ??</processNodeName>
           </callManager>
         </member>
       </members>
