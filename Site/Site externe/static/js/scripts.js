@@ -30,15 +30,20 @@ function updateCartCount() {
     // Ne met à jour que les badges du panier, pas les badges "Promo"
     document.querySelectorAll('.btn .badge.bg-dark').forEach(el => el.textContent = count);
 }
-// Ajout listeners sur tous les boutons "Ajouter au panier"
+// Ajout listeners sur tous les boutons "Ajouter au panier" ou "Add to cart"
 document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
-    document.querySelectorAll('button.btn-outline-dark').forEach(btn => {
-        if (btn.textContent.includes('Ajouter au panier')) {
+    document.querySelectorAll('button.btn-outline-dark, a.btn-outline-dark').forEach(btn => {
+        if (
+            btn.textContent.includes('Ajouter au panier') ||
+            btn.textContent.includes('Add to cart')
+        ) {
             btn.addEventListener('click', function(e) {
-                const parent = btn.closest('.col-md-6, .card-body, .row');
+                e.preventDefault();
+                // Trouve le parent qui contient les infos produit
+                let parent = btn.closest('.col-md-6') || btn.closest('.card-body') || btn.closest('.row') || btn.closest('.card');
                 let sku = parent && parent.querySelector('.small') ? parent.querySelector('.small').textContent.replace('SKU:','').trim() : 'SKU';
-                let name = parent && parent.querySelector('h1, h5') ? parent.querySelector('h1, h5').textContent.trim() : 'Produit';
+                let name = parent && (parent.querySelector('h1') || parent.querySelector('h5')) ? (parent.querySelector('h1') || parent.querySelector('h5')).textContent.trim() : 'Produit';
                 let price = parent && parent.querySelector('.fs-5 span:not(.text-decoration-line-through)') ? parent.querySelector('.fs-5 span:not(.text-decoration-line-through)').textContent.replace('€','').replace(',','.').trim() : '0';
                 let quantity = 1;
                 let option = '';
@@ -51,3 +56,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+function renderCart() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartContent = document.getElementById('cartContent');
+    if (!cart.length) {
+        cartContent.innerHTML = '<p class="mb-0">Votre panier est vide pour le moment.</p>';
+        return;
+    }
+    let html = '<table class="table"><thead><tr><th>Produit</th><th>Option</th><th>Prix</th><th>Quantité</th><th>Total</th><th></th></tr></thead><tbody>';
+    let total = 0;
+    cart.forEach((item, i) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        html += `<tr><td>${item.name}</td><td>${item.option || ''}</td><td>${item.price.toFixed(2)}€</td><td>${item.quantity}</td><td>${itemTotal.toFixed(2)}€</td><td><button class='btn btn-sm btn-danger' onclick='removeCartItem(${i})'>Supprimer</button></td></tr>`;
+    });
+    html += `</tbody></table><div class='text-end fw-bold'>Total : ${total.toFixed(2)}€</div>`;
+    html += `<div class="d-grid mt-3"><a href="/checkout" class="btn btn-success">Payer</a></div>`;
+    cartContent.innerHTML = html;
+}

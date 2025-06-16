@@ -3,6 +3,8 @@ import psycopg2
 import psycopg2.extras
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
+import json
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'devsecret')
@@ -170,6 +172,34 @@ def register_en():
 def logout_en():
     session.clear()
     return redirect(url_for('index_en'))
+
+@app.route('/checkout', methods=['GET'])
+def checkout():
+    return render_template('checkout.html')
+
+@app.route('/pay', methods=['POST'])
+def pay():
+    cart_json = request.form.get('cart')
+    card_number = request.form.get('card_number')
+    user_email = session.get('user_email', 'guest')
+    if not cart_json:
+        flash('Panier vide.', 'danger')
+        return redirect(url_for('panier_fr'))
+    cart = json.loads(cart_json)
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('INSERT INTO orders (user_email, created_at) VALUES (%s, %s) RETURNING id', (user_email, datetime.now()))
+    order_id = cur.fetchone()[0]
+    for item in cart:
+        cur.execute(
+            'INSERT INTO order_items (order_id, sku, name, option, price, quantity) VALUES (%s, %s, %s, %s, %s, %s)',
+            (order_id, item.get('sku'), item.get('name'), item.get('option'), item.get('price'), item.get('quantity'))
+        )
+    conn.commit()
+    cur.close()
+    conn.close()
+    # Ne pas utiliser flash ici, affiche le message directement
+    return render_template('payment_success.html')
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

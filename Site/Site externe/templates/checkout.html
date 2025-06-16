@@ -1,0 +1,51 @@
+{% include '1_head_fr.html' %}
+<body>
+    {% include '1_navbar_fr.html' %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5" style="max-width: 400px;">
+            <h1 class="display-6 fw-bolder mb-4">Paiement</h1>
+            <form id="paymentForm" method="post" action="{{ url_for('pay') }}">
+                <div class="mb-3">
+                    <label for="card_number" class="form-label">Numéro de carte bancaire</label>
+                    <input type="text" class="form-control" id="card_number" name="card_number" required maxlength="19" placeholder="1234 5678 9012 3456">
+                </div>
+                <input type="hidden" name="cart" id="cartInput">
+                <button type="submit" class="btn btn-dark w-100">Payer</button>
+            </form>
+            <div id="checkoutCart" class="mt-4"></div>
+        </div>
+    </section>
+    <script>
+    // Remplit le champ caché avec le panier actuel
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        const cart = localStorage.getItem('cart') || '[]';
+        document.getElementById('cartInput').value = cart;
+        // Vide le panier après paiement
+        localStorage.removeItem('cart');
+    });
+
+    // Affiche le panier sous le bouton payer
+    function renderCheckoutCart() {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const checkoutCart = document.getElementById('checkoutCart');
+        if (!cart.length) {
+            checkoutCart.innerHTML = '<div class="alert alert-info">Votre panier est vide.</div>';
+            return;
+        }
+        let html = '<h5 class="mb-3">Votre commande :</h5>';
+        html += '<ul class="list-group mb-2">';
+        let total = 0;
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+            html += `<li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>${item.name}${item.option ? ' (' + item.option + ')' : ''} x${item.quantity}</span>
+                        <span>${itemTotal.toFixed(2)}€</span>
+                    </li>`;
+        });
+        html += `</ul><div class="text-end fw-bold">Total : ${total.toFixed(2)}€</div>`;
+        checkoutCart.innerHTML = html;
+    }
+    document.addEventListener('DOMContentLoaded', renderCheckoutCart);
+    </script>
+</body>

@@ -36,3 +36,11 @@ sudo systemctl restart docker
 
 sudo docker pull postgres:15
 
+## Accéder à la base de données Postgres dans le conteneur
+
+# Ouvre un terminal SQL dans le conteneur db :
+sudo docker exec -it site_db_1 psql -U postgres -d sae24
+
+# Si le nom du conteneur est différent, liste les conteneurs pour trouver le bon nom :
+sudo docker ps
+
