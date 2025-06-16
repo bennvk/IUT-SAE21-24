@@ -2,14 +2,33 @@ version: '3.8'
 
 services:
   web:
-    build: ./app
+    build: .
     container_name: flask_web
     ports:
       - "8080:5000"
     volumes:
-      - ./app:/app
+      - .:/app
     depends_on:
+      - db
       - video_processor
+    environment:
+      HTTP_PROXY: http://cache-etu.univ-artois.fr:3128
+      HTTPS_PROXY: http://cache-etu.univ-artois.fr:3128
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: ramba
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      HTTP_PROXY: http://cache-etu.univ-artois.fr:3128
+      HTTPS_PROXY: http://cache-etu.univ-artois.fr:3128
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   video_processor:
     image: jrottenberg/ffmpeg:latest
@@ -21,9 +40,18 @@ services:
       -vcodec copy -f flv rtmp://rtmp_server:1935/live/stream
     depends_on:
       - rtmp_server
+    environment:
+      HTTP_PROXY: http://cache-etu.univ-artois.fr:3128
+      HTTPS_PROXY: http://cache-etu.univ-artois.fr:3128
 
   rtmp_server:
     image: alfg/nginx-rtmp
     container_name: rtmp_server
     ports:
       - "1935:1935"
+    environment:
+      HTTP_PROXY: http://cache-etu.univ-artois.fr:3128
+      HTTPS_PROXY: http://cache-etu.univ-artois.fr:3128
+
+volumes:
+  pgdata:
