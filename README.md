@@ -66,13 +66,17 @@ Le projet est évalué à la fois collectivement et individuellement :
 
 ---
 
+## 🥇 L'équipe
+
 > Projet encadré par le département R&T de l'IUT de Béthune
 > 
 > 
 > Toute l’équipe est mobilisée pour atteindre les objectifs avec rigueur, autonomie et entraide !
 > 
 
-Société 9
+Société 9, RAMBA !
+
+<img src="Site/static/assets/RAMBA.png" alt="plan adressage" width="200"/>
 
 <aside>
 
@@ -87,3 +91,7 @@ Alexis Stingre
 Raphaël Laurent
 
 </aside>
+
+<p align="center">
+  <img src="Site/static/assets/photo-groupe.jpg" alt="plan adressage" width="400"/>
+</p>
