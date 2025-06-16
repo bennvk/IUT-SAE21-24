@@ -76,7 +76,7 @@ Le projet est évalué à la fois collectivement et individuellement :
 
 Société 9, RAMBA !
 
-<img src="Site/Site Externe/static/assets/RAMBA.png" alt="plan adressage" width="200"/>
+<img src="Site/Site externe/static/assets/RAMBA.png" alt="Logo" width="200"/>
 
 <aside>
 
@@ -93,5 +93,5 @@ Raphaël Laurent
 </aside>
 
 <p align="center">
-  <img src="Site/Site Externe/static/assets/photo-groupe.jpg" alt="plan adressage" width="400"/>
+  <img src="Site/Site interne/static/assets/photo-groupe.jpg" alt="Photo groupe" width="400"/>
 </p>
