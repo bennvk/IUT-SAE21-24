@@ -1,29 +1,36 @@
+version: "3.9"
+
 services:
   web:
-    build: .
+    build:
+      context: .
+      # Si on est à l'Université d'Artois, on utilise le proxy.
+      args:
+        HTTP_PROXY: http://cache-etu.univ-artois.fr:3128
+        HTTPS_PROXY: http://cache-etu.univ-artois.fr:3128
     ports:
       - "5000:5000"
     volumes:
       - .:/app
+    working_dir: /app
     environment:
-      - FLASK_ENV=development
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-    env_file:
-      - .env
+      - HTTP_PROXY=http://cache-etu.univ-artois.fr:3128
+      - HTTPS_PROXY=http://cache-etu.univ-artois.fr:3128
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/sae24
     depends_on:
       - db
+    command: flask run --host=0.0.0.0
 
   db:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_USER: ramba
-      POSTGRES_PASSWORD: ramba_password
-      POSTGRES_DB: ramba_db
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sae24
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql:ro
 
 volumes:
-  postgres_data:
+  pgdata:

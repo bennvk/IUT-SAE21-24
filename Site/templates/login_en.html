@@ -3,6 +3,16 @@
     {% include '1_navbar_fr.html' %}
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5" style="max-width: 400px;">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
             <h1 class="display-6 fw-bolder mb-4">Sign in</h1>
             <form method="post">
                 <div class="mb-3">

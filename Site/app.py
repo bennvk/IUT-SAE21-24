@@ -9,9 +9,9 @@ app.secret_key = os.environ.get('SECRET_KEY', 'devsecret')
 
 def get_db_connection():
     return psycopg2.connect(
-        dbname="ramba_db",
-        user="ramba",
-        password="ramba_password",
+        dbname="sae24",
+        user="postgres",
+        password="postgres",
         host="db"
     )
 
@@ -94,7 +94,8 @@ def login_fr():
             session['user_id'] = user['id']
             session['user_email'] = user['email']
             return redirect(url_for('index_fr'))
-        flash('Identifiants invalides', 'danger')
+        else:
+            flash('Identifiants invalides', 'danger')
     return render_template('login_fr.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -139,7 +140,8 @@ def login_en():
             session['user_id'] = user['id']
             session['user_email'] = user['email']
             return redirect(url_for('index_en'))
-        flash('Invalid credentials', 'danger')
+        else:
+            flash('Invalid credentials', 'danger')
     return render_template('login_en.html')
 
 @app.route('/register-en', methods=['GET', 'POST'])
