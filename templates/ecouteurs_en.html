@@ -1,0 +1,36 @@
+{% include '1_head_fr.html' %}
+<body>
+    {% include '1_navbar_fr.html' %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ url_for('static', filename='assets/ecouteurs.png') }}" alt="RAMBA Wireless Earbuds" /></div>
+                <div class="col-md-6">
+                    <div class="small mb-1">SKU: RAMBA-ECOUT-001</div>
+                    <h1 class="display-5 fw-bolder">Wireless Earbuds</h1>
+                    <div class="fs-5 mb-4">
+                        <span class="text-decoration-line-through">€80</span>
+                        <span>€59.99</span>
+                    </div>
+                    <p class="lead">Enjoy high-quality sound with RAMBA wireless earbuds. Long battery life, ergonomic design, perfect for sports or everyday use. Charging case included.</p>
+                    <form>
+                        <div class="mb-3">
+                            <label for="optionProduit" class="form-label fw-bold">Options:</label>
+                            <select class="form-select mb-3" id="optionProduit" name="optionProduit">
+                                <option value="base">Classic version - €59.99</option>
+                                <option value="pro">Pro version (active noise cancelling) - €79.99</option>
+                            </select>
+                        </div>
+                        <div class="d-flex">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <i class="bi-cart-fill me-1"></i>
+                                Add to cart
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

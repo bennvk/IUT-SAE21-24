@@ -1,0 +1,27 @@
+{% include '1_head_fr.html' %}
+<body>
+    {% include '1_navbar_fr.html' %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ url_for('static', filename='assets/batterie.png') }}" alt="RAMBA Power Bank" /></div>
+                <div class="col-md-6">
+                    <div class="small mb-1">SKU: RAMBA-BAT-001</div>
+                    <h1 class="display-5 fw-bolder">Ultra-compact Power Bank</h1>
+                    <div class="fs-5 mb-5">
+                        <span class="text-decoration-line-through">€45</span>
+                        <span>€39.99</span>
+                    </div>
+                    <p class="lead">Discover the ultra-compact RAMBA power bank, ideal for charging your devices wherever you are. Its small size makes it easy to slip into a pocket or bag. Large capacity (15k mA), compatible with smartphones and tablets.</p>
+                    <div class="d-flex">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <i class="bi-cart-fill me-1"></i>
+                            Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
