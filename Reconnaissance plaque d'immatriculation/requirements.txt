@@ -1,4 +1,0 @@
-opencv-python
-easyocr
-torch
-numpy
