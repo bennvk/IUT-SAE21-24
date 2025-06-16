@@ -93,5 +93,5 @@ Raphaël Laurent
 </aside>
 
 <p align="center">
-  <img src="Site/Site interne/static/assets/photo-groupe.jpg" alt="Photo groupe" width="400"/>
+  <img src="Site/Site externe/static/assets/photo-groupe.jpg" alt="Photo groupe" width="400"/>
 </p>
