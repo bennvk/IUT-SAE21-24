@@ -1,9 +1,5 @@
 #!/bin/bash
 
-mkdir -p ~/Documents/cam-hls
-cd ~/Documents/cam-hls
-rm -f stream.m3u8 stream*.ts
-
 ffmpeg -fflags nobuffer \
   -flags low_delay \
   -strict experimental \
