@@ -10,11 +10,14 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'devsecret')
 
 def get_db_connection():
+    db_url = os.environ.get("DATABASE_URL")
+    if db_url:
+        return psycopg2.connect(db_url)
     return psycopg2.connect(
         dbname="sae24",
         user="postgres",
         password="postgres",
-        host="db"
+        host="site_externe_db"
     )
 
 @app.route('/')

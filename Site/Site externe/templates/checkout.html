@@ -1,16 +1,23 @@
+{% set is_en = request.path.startswith('/en') %}
 {% include '1_head_fr.html' %}
 <body>
     {% include '1_navbar_fr.html' %}
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5" style="max-width: 400px;">
-            <h1 class="display-6 fw-bolder mb-4">Paiement</h1>
+            <h1 class="display-6 fw-bolder mb-4">
+                {% if is_en %}Payment{% else %}Paiement{% endif %}
+            </h1>
             <form id="paymentForm" method="post" action="{{ url_for('pay') }}">
                 <div class="mb-3">
-                    <label for="card_number" class="form-label">Numéro de carte bancaire</label>
+                    <label for="card_number" class="form-label">
+                        {% if is_en %}Credit Card Number{% else %}Numéro de carte bancaire{% endif %}
+                    </label>
                     <input type="text" class="form-control" id="card_number" name="card_number" required maxlength="19" placeholder="1234 5678 9012 3456">
                 </div>
                 <input type="hidden" name="cart" id="cartInput">
-                <button type="submit" class="btn btn-dark w-100">Payer</button>
+                <button type="submit" class="btn btn-dark w-100">
+                    {% if is_en %}Pay{% else %}Payer{% endif %}
+                </button>
             </form>
             <div id="checkoutCart" class="mt-4"></div>
         </div>
@@ -29,10 +36,10 @@
         const cart = JSON.parse(localStorage.getItem('cart') || '[]');
         const checkoutCart = document.getElementById('checkoutCart');
         if (!cart.length) {
-            checkoutCart.innerHTML = '<div class="alert alert-info">Votre panier est vide.</div>';
+            checkoutCart.innerHTML = '{% if is_en %}<div class="alert alert-info">Your cart is empty.</div>{% else %}<div class="alert alert-info">Votre panier est vide.</div>{% endif %}';
             return;
         }
-        let html = '<h5 class="mb-3">Votre commande :</h5>';
+        let html = '<h5 class="mb-3">{% if is_en %}Your order:{% else %}Votre commande :{% endif %}</h5>';
         html += '<ul class="list-group mb-2">';
         let total = 0;
         cart.forEach(item => {
@@ -43,7 +50,7 @@
                         <span>${itemTotal.toFixed(2)}€</span>
                     </li>`;
         });
-        html += `</ul><div class="text-end fw-bold">Total : ${total.toFixed(2)}€</div>`;
+        html += `</ul><div class="text-end fw-bold">{% if is_en %}Total:{% else %}Total :{% endif %} ${total.toFixed(2)}€</div>`;
         checkoutCart.innerHTML = html;
     }
     document.addEventListener('DOMContentLoaded', renderCheckoutCart);

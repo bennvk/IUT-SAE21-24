@@ -42,9 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 // Trouve le parent qui contient les infos produit
                 let parent = btn.closest('.col-md-6') || btn.closest('.card-body') || btn.closest('.row') || btn.closest('.card');
+                // Nom du produit
+                let name = parent && (parent.querySelector('h1, h5')) ? parent.querySelector('h1, h5').textContent.trim() : 'Produit';
+                // SKU
                 let sku = parent && parent.querySelector('.small') ? parent.querySelector('.small').textContent.replace('SKU:','').trim() : 'SKU';
-                let name = parent && (parent.querySelector('h1') || parent.querySelector('h5')) ? (parent.querySelector('h1') || parent.querySelector('h5')).textContent.trim() : 'Produit';
-                let price = parent && parent.querySelector('.fs-5 span:not(.text-decoration-line-through)') ? parent.querySelector('.fs-5 span:not(.text-decoration-line-through)').textContent.replace('€','').replace(',','.').trim() : '0';
+                // Prix (prend le dernier span dans .fs-5 ou .fs-5.mb-5/.mb-4)
+                let priceSpan = parent && parent.querySelector('.fs-5 span:last-child, .fs-5.mb-5 span:last-child, .fs-5.mb-4 span:last-child');
+                let price = priceSpan ? priceSpan.textContent.replace(/[^\d,.]/g,'').replace(',','.').trim() : '0';
                 let quantity = 1;
                 let option = '';
                 const inputQty = parent && parent.querySelector('#inputQuantity');

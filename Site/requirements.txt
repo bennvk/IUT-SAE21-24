@@ -1,0 +1,4 @@
+Flask
+psycopg2-binary
+Werkzeug
+# Ajoute ici d'autres dépendances communes si besoin

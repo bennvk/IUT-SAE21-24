@@ -1,4 +1,3 @@
-flask
+Flask
 psycopg2-binary
-python-dotenv
-werkzeug
+Werkzeug

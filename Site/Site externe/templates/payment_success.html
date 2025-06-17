@@ -1,12 +1,21 @@
+{% set is_en = request.path.startswith('/en') %}
 {% include '1_head_fr.html' %}
 <body>
     {% include '1_navbar_fr.html' %}
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5 text-center">
-            <div class="alert alert-success">Paiement effectué ! Merci pour votre achat.</div>
-            <h1 class="display-6 fw-bolder mb-4">Merci pour votre achat !</h1>
-            <p>Votre commande a bien été enregistrée.</p>
-            <a href="{{ url_for('index_fr') }}" class="btn btn-outline-dark mt-3">Retour à la boutique</a>
+            <div class="alert alert-success">
+                {% if is_en %}Payment successful! Thank you for your purchase.{% else %}Paiement effectué ! Merci pour votre achat.{% endif %}
+            </div>
+            <h1 class="display-6 fw-bolder mb-4">
+                {% if is_en %}Thank you for your purchase!{% else %}Merci pour votre achat !{% endif %}
+            </h1>
+            <p>
+                {% if is_en %}Your order has been recorded.{% else %}Votre commande a bien été enregistrée.{% endif %}
+            </p>
+            <a href="{{ url_for('index_en') if is_en else url_for('index_fr') }}" class="btn btn-outline-dark mt-3">
+                {% if is_en %}Back to shop{% else %}Retour à la boutique{% endif %}
+            </a>
         </div>
     </section>
 </body>

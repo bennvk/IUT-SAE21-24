@@ -1,0 +1,74 @@
+version: "3.9"
+
+services:
+  site_externe_web:
+    build:
+      context: ./Site externe
+      dockerfile: ../Dockerfile
+      args:
+        HTTP_PROXY: http://cache-etu.univ-artois.fr:3128
+        HTTPS_PROXY: http://cache-etu.univ-artois.fr:3128
+    container_name: site_externe_web
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./Site externe:/app
+    working_dir: /app
+    environment:
+      - HTTP_PROXY=http://cache-etu.univ-artois.fr:3128
+      - HTTPS_PROXY=http://cache-etu.univ-artois.fr:3128
+      - DATABASE_URL=postgresql://postgres:postgres@site_externe_db:5432/sae24
+    depends_on:
+      - site_externe_db
+    command: flask run --host=0.0.0.0
+
+  site_externe_db:
+    image: postgres:15
+    container_name: site_externe_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sae24
+    volumes:
+      - site_externe_pgdata:/var/lib/postgresql/data
+      - ./Site externe/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql:ro
+
+  site_interne_web:
+    build:
+      context: ./Site interne
+      dockerfile: ../Dockerfile
+      args:
+        HTTP_PROXY: http://cache-etu.univ-artois.fr:3128
+        HTTPS_PROXY: http://cache-etu.univ-artois.fr:3128
+    container_name: site_interne_web
+    ports:
+      - "8080:5000"
+    volumes:
+      - ./Site interne:/app
+    working_dir: /app
+    environment:
+      - HTTP_PROXY=http://cache-etu.univ-artois.fr:3128
+      - HTTPS_PROXY=http://cache-etu.univ-artois.fr:3128
+      - POSTGRES_HOST=site_interne_db
+      - POSTGRES_DB=ramba
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - site_interne_db
+    command: python app.py
+
+  site_interne_db:
+    image: postgres:15
+    container_name: site_interne_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ramba
+    volumes:
+      - site_interne_pgdata:/var/lib/postgresql/data
+
+volumes:
+  site_externe_pgdata:
+  site_interne_pgdata:

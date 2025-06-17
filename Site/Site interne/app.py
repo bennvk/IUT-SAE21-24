@@ -8,7 +8,7 @@ app.secret_key = os.environ.get("SECRET_KEY", "dev_secret_key")
 app.debug = True
 
 # Configuration de la base de données PostgreSQL
-DB_HOST = os.environ.get("POSTGRES_HOST", "localhost")
+DB_HOST = os.environ.get("POSTGRES_HOST", "site_interne_db")
 DB_NAME = os.environ.get("POSTGRES_DB", "ramba")
 DB_USER = os.environ.get("POSTGRES_USER", "postgres")
 DB_PASS = os.environ.get("POSTGRES_PASSWORD", "postgres")
@@ -42,9 +42,11 @@ def init_db():
     cur.close()
     conn.close()
 
-@app.before_first_request
-def before_first_request():
-    init_db()
+@app.before_request
+def before_request():
+    if not hasattr(app, 'db_initialized'):
+        init_db()
+        app.db_initialized = True
 
 @app.route('/', methods=['GET'])
 def index():
