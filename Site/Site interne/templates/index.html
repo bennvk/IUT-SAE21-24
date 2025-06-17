@@ -6,6 +6,8 @@
   <title>RAMBA | Vigilance</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
   <style>
     body {
       background: url("{{ url_for('static', filename='assets/background.gif') }}") no-repeat center center fixed;
@@ -20,8 +22,7 @@
       <div class="col-md-6 d-flex flex-column align-items-center">
         <div class="mb-2 font-weight-bold text-secondary">Caméra 1</div>
         <div class="embed-responsive embed-responsive-16by9 w-100 mb-3">
-          <video class="embed-responsive-item" controls autoplay poster="{{ url_for('static', filename='assets/nosignal.gif') }}">
-            <source src="http://localhost:1935/live/stream" type="video/mp4">
+          <video id="video1" class="embed-responsive-item" width="640" height="480" controls autoplay muted poster="{{ url_for('static', filename='assets/nosignal.gif') }}">
             <img src="{{ url_for('static', filename='assets/nosignal.gif') }}" alt="Pas de signal">
             Votre navigateur ne supporte pas l'affichage du flux vidéo.
           </video>
@@ -39,5 +40,27 @@
       </div>
     </div>
   </div>
+  <script>
+    // Script pour Caméra 1 (HLS)
+    const video1 = document.getElementById('video1');
+    const src1 = 'stream.m3u8';
+
+    if (Hls.isSupported()) {
+      const hls1 = new Hls();
+      hls1.loadSource(src1);
+      hls1.attachMedia(video1);
+      hls1.on(Hls.Events.MANIFEST_PARSED, function () {
+        video1.play();
+      });
+    } else if (video1.canPlayType('application/vnd.apple.mpegurl')) {
+      video1.src = src1;
+      video1.addEventListener('loadedmetadata', function () {
+        video1.play();
+      });
+    } else {
+      // Optionnel : afficher une alerte ou laisser le poster "no signal"
+      // alert("Votre navigateur ne supporte pas le HLS.");
+    }
+  </script>
 </body>
 </html>
