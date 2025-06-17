@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm -f stream*.ts stream.m3u8
+
 ffmpeg -fflags nobuffer \
   -flags low_delay \
   -strict experimental \
