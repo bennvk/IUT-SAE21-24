@@ -1,0 +1,131 @@
+#include <SoftwareSerial.h>
+#include <Wire.h>
+#include "DHT20.h"
+
+DHT20 dht20;
+
+String inputString = "";
+bool stringComplete = false;
+
+long old_time = millis();
+long new_time;
+
+long uplink_interval = 30000;
+
+bool time_to_at_recvb = false;
+bool get_LA66_data_status = false;
+bool network_joined_status = false;
+
+float DHT20_temp;
+float DHT20_hum;
+
+SoftwareSerial ss(10, 11); // Arduino RX, TX
+
+char rxbuff[128];
+uint8_t rxbuff_index = 0;
+
+void setup() {
+  Serial.begin(9600);
+  ss.begin(9600);
+  ss.listen();
+
+  inputString.reserve(200);
+
+  Wire.begin();
+
+
+  ss.println("ATZ");
+}
+
+void loop() {
+  new_time = millis();
+
+  if ((new_time - old_time >= uplink_interval) && (network_joined_status == 1)) {
+    old_time = new_time;
+    get_LA66_data_status = false;
+
+    int status = dht20.read();
+    if (status == 0) {
+      DHT20_temp = dht20.getTemperature();
+      DHT20_hum = dht20.getHumidity();
+
+      if (DHT20_temp > 60) DHT20_temp = 60;
+      if (DHT20_temp < -20) DHT20_temp = -20;
+
+      if (DHT20_hum > 100) DHT20_hum = 100;
+      if (DHT20_hum < 0) DHT20_hum = 0;
+
+    } else {
+      Serial.print("Erreur lecture capteur : code ");
+      Serial.println(status);
+      DHT20_temp = 327.67;
+      DHT20_hum = 327.67;
+    }
+
+    Serial.print("Temperature: ");
+    Serial.print(DHT20_temp);
+    Serial.println("°C");
+    Serial.print("Humidity: ");
+    Serial.print(DHT20_hum);
+    Serial.println("%");
+
+    char sensor_data_buff[128] = "\0";
+    snprintf(sensor_data_buff, 128, "AT+SENDB=%d,%d,%d,%02X%02X%02X%02X", 0, 2, 4, (short)(DHT20_temp * 100) >> 8 & 0xFF, (short)(DHT20_temp * 100) & 0xFF, (short)(DHT20_hum * 10) >> 8 & 0xFF, (short)(DHT20_hum * 10) & 0xFF);
+    ss.println(sensor_data_buff);
+  }
+
+  if (time_to_at_recvb == true) {
+    time_to_at_recvb = false;
+    get_LA66_data_status = true;
+    delay(1000);
+    ss.println("AT+CFG");
+  }
+
+  while (ss.available()) {
+    char inChar = (char) ss.read();
+    inputString += inChar;
+    rxbuff[rxbuff_index++] = inChar;
+
+    if (rxbuff_index > 128) break;
+
+    if (inChar == '\n' || inChar == '\r') {
+      stringComplete = true;
+      rxbuff[rxbuff_index] = '\0';
+
+      if (strncmp(rxbuff, "JOINED", 6) == 0) network_joined_status = 1;
+      if (strncmp(rxbuff, "Dragino LA66 Device", 19) == 0) network_joined_status = 0;
+      if (strncmp(rxbuff, "Run AT+RECVB=? to see detail", 28) == 0) {
+        time_to_at_recvb = true;
+        stringComplete = false;
+        inputString = "\0";
+      }
+      if (strncmp(rxbuff, "AT+RECVB=", 9) == 0) {
+        stringComplete = false;
+        inputString = "\0";
+        Serial.print("\r\nGet downlink data(FPort & Payload) ");
+        Serial.println(&rxbuff[9]);
+      }
+
+      rxbuff_index = 0;
+      if (get_LA66_data_status == true) {
+        stringComplete = false;
+        inputString = "\0";
+      }
+    }
+  }
+
+  while (Serial.available()) {
+    char inChar = (char) Serial.read();
+    inputString += inChar;
+    if (inChar == '\n' || inChar == '\r') {
+      ss.print(inputString);
+      inputString = "\0";
+    }
+  }
+
+  if (stringComplete) {
+    Serial.print(inputString);
+    inputString = "\0";
+    stringComplete = false;
+  }
+}
