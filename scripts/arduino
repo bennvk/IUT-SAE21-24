@@ -1,8 +1,8 @@
 #include <SoftwareSerial.h>
 #include <Wire.h>
-#include "DHT20.h"
+#include "DHT11.h"
 
-DHT20 dht20;
+DHT11 DHT11;
 
 String inputString = "";
 bool stringComplete = false;
@@ -16,8 +16,8 @@ bool time_to_at_recvb = false;
 bool get_LA66_data_status = false;
 bool network_joined_status = false;
 
-float DHT20_temp;
-float DHT20_hum;
+float DHT11_temp;
+float DHT11_hum;
 
 SoftwareSerial ss(10, 11); // Arduino RX, TX
 
@@ -44,33 +44,33 @@ void loop() {
     old_time = new_time;
     get_LA66_data_status = false;
 
-    int status = dht20.read();
+    int status = DHT11.read();
     if (status == 0) {
-      DHT20_temp = dht20.getTemperature();
-      DHT20_hum = dht20.getHumidity();
+      DHT11_temp = DHT11.getTemperature();
+      DHT11_hum = DHT11.getHumidity();
 
-      if (DHT20_temp > 60) DHT20_temp = 60;
-      if (DHT20_temp < -20) DHT20_temp = -20;
+      if (DHT11_temp > 60) DHT11_temp = 60;
+      if (DHT11_temp < -20) DHT11_temp = -20;
 
-      if (DHT20_hum > 100) DHT20_hum = 100;
-      if (DHT20_hum < 0) DHT20_hum = 0;
+      if (DHT11_hum > 100) DHT11_hum = 100;
+      if (DHT11_hum < 0) DHT11_hum = 0;
 
     } else {
       Serial.print("Erreur lecture capteur : code ");
       Serial.println(status);
-      DHT20_temp = 327.67;
-      DHT20_hum = 327.67;
+      DHT11_temp = 327.67;
+      DHT11_hum = 327.67;
     }
 
     Serial.print("Temperature: ");
-    Serial.print(DHT20_temp);
+    Serial.print(DHT11_temp);
     Serial.println("°C");
     Serial.print("Humidity: ");
-    Serial.print(DHT20_hum);
+    Serial.print(DHT11_hum);
     Serial.println("%");
 
     char sensor_data_buff[128] = "\0";
-    snprintf(sensor_data_buff, 128, "AT+SENDB=%d,%d,%d,%02X%02X%02X%02X", 0, 2, 4, (short)(DHT20_temp * 100) >> 8 & 0xFF, (short)(DHT20_temp * 100) & 0xFF, (short)(DHT20_hum * 10) >> 8 & 0xFF, (short)(DHT20_hum * 10) & 0xFF);
+    snprintf(sensor_data_buff, 128, "AT+SENDB=%d,%d,%d,%02X%02X%02X%02X", 0, 2, 4, (short)(DHT11_temp * 100) >> 8 & 0xFF, (short)(DHT11_temp * 100) & 0xFF, (short)(DHT11_hum * 10) >> 8 & 0xFF, (short)(DHT11_hum * 10) & 0xFF);
     ss.println(sensor_data_buff);
   }
 
