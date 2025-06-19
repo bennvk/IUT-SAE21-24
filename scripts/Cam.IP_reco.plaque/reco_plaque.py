@@ -5,7 +5,7 @@ import sqlite3
 import easyocr
 import re
 
-CAMERA_SOURCE = 0
+CAMERA_SOURCE = "rtsp://192.168.146.1:554/live.sdp"
 SAVE_IMAGES = True
 DB_PATH = "plates.db"
 
