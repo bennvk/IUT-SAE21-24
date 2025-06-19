@@ -15,14 +15,14 @@
                     <a class="nav-link" href="{% if request.endpoint and request.endpoint.endswith('_en') %}{{ url_for('about_en') }}{% else %}{{ url_for('about_fr') }}{% endif %}">{% if request.endpoint and request.endpoint.endswith('_en') %}About{% else %}À propos{% endif %}</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Langue
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="langDropdown">
-                        <li><a class="dropdown-item" href="{{ url_for('index_fr') }}">Français</a></li>
-                        <li><a class="dropdown-item" href="{{ url_for('index_en') }}">English</a></li>
-                    </ul>
-                </li>
+    <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {% if request.endpoint and request.endpoint.endswith('_en') %}Language{% else %}Langue{% endif %}
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="langDropdown">
+        <li><a class="dropdown-item" href="{{ url_for('index_fr') }}">Français</a></li>
+        <li><a class="dropdown-item" href="{{ url_for('index_en') }}">English</a></li>
+    </ul>
+</li>
             </ul>
             <form class="d-flex">
                 <a class="btn btn-outline-dark me-2" href="{% if request.endpoint and request.endpoint.endswith('_en') %}{{ url_for('panier_en') }}{% else %}{{ url_for('panier_fr') }}{% endif %}">

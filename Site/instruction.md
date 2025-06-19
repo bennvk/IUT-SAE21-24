@@ -44,3 +44,8 @@ sudo docker exec -it site_db_1 psql -U postgres -d sae24
 # Si le nom du conteneur est différent, liste les conteneurs pour trouver le bon nom :
 sudo docker ps
 
+## POUR QUE LES CAM FONCTIONNE
+
+chmod +x Site\ interne/start.sh
+chmod +x Site\ interne/cam1/start.sh
+chmod +x Site\ interne/cam2/start.sh

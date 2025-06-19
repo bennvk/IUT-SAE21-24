@@ -1,0 +1,14 @@
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">
+            Copyright &copy; RAMBA 2025. 
+            <a href="http://192.168.148.1:8080">
+                {% if request.endpoint and request.endpoint.endswith('_en') %}
+                    Security site
+                {% else %}
+                    Site sécurité
+                {% endif %}
+            </a>
+        </p>
+    </div>
+</footer>
