@@ -10,7 +10,7 @@ services:
         HTTPS_PROXY: http://cache-etu.univ-artois.fr:3128
     container_name: site_externe_web
     ports:
-      - "5000:5000"
+      - "80:80"
     volumes:
       - ./Site externe:/app
     working_dir: /app
@@ -20,7 +20,7 @@ services:
       - DATABASE_URL=postgresql://postgres:postgres@site_externe_db:5432/sae24
     depends_on:
       - site_externe_db
-    command: flask run --host=0.0.0.0
+    command: flask run --host=0.0.0.0 --port=80
 
   site_externe_db:
     image: postgres:15

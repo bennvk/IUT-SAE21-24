@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f6fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1140px;
+  margin: auto;
+  padding: 15px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  background-color: white;
+}
+
+.card-body {
+  flex: 1;
+  padding: 3rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ced4da;
+  font-size: 1rem;
+}
+
+.btn-theme {
+  background-color: #5369f8;
+  color: white;
+  padding: 0.75rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.btn-theme:hover {
+  background-color: #3f51d2;
+}
+
+.account-block {
+  background-color: #18191a;
+  color: white;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  position: relative;
+}
+
+.account-block .overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.account-testimonial {
+  z-index: 1;
+  text-align: center;
+}
+.account-testimonial h4 {
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+.account-testimonial p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.text-theme {
+  color: #5369f8 !important;
+}
+.alert {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.alert-danger {
+  background: #f8d7da;
+  color: #721c24;
+}
+.alert-success {
+  background: #d4edda;
+  color: #155724;
+}
+
+@media (max-width: 991.98px) {
+  .card {
+    flex-direction: column;
+  }
+  .account-block {
+    display: none;
+  }
+}
